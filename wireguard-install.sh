@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# https://github.com/Nyr/wireguard-install
+# https://github.com/malrazer/wg-install
 #
-# Copyright (c) 2020 Nyr. Released under the MIT License.
+# Copyright (c) 2020 malrazer. Released under the MIT License.
 
 
 # Detect Debian users running the script with "sh" instead of bash
@@ -178,6 +178,7 @@ EOF
 if [[ ! -e /etc/wireguard/wg0.conf ]]; then
 	clear
 	echo 'Welcome to this WireGuard road warrior installer!'
+	echo 'Thank you for using autoscript by malrazer'
 	# If system has a single IPv4, it is selected automatically. Else, ask the user
 	if [[ $(ip -4 addr | grep inet | grep -vEc '127(\.[0-9]{1,3}){3}') -eq 1 ]]; then
 		ip=$(ip -4 addr | grep inet | grep -vE '127(\.[0-9]{1,3}){3}' | cut -d '/' -f 1 | grep -oE '[0-9]{1,3}(\.[0-9]{1,3}){3}')
@@ -228,12 +229,12 @@ if [[ ! -e /etc/wireguard/wg0.conf ]]; then
 	fi
 	echo
 	echo "What port should WireGuard listen to?"
-	read -p "Port [51820]: " port
+	read -p "Port [44200]: " port
 	until [[ -z "$port" || "$port" =~ ^[0-9]+$ && "$port" -le 65535 ]]; do
 		echo "$port: invalid port."
-		read -p "Port [51820]: " port
+		read -p "Port [44200]: " port
 	done
-	[[ -z "$port" ]] && port="51820"
+	[[ -z "$port" ]] && port="44200"
 	echo
 	echo "Enter a name for the first client:"
 	read -p "Name [client]: " unsanitized_client
@@ -496,8 +497,10 @@ EOF
 	echo
 	echo "The client configuration is available in:" ~/"$client.conf"
 	echo "New clients can be added by running this script again."
+	echo "Autoscript by malrazer."
 else
 	clear
+	echo "Autoscript by malrazer."
 	echo "WireGuard is already installed."
 	echo
 	echo "Select an option:"
